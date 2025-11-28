@@ -182,12 +182,13 @@ class TestDataCleaner(unittest.TestCase):
         df = make_sample_df()
         cleaner = DataCleaner()
 
-        # Llamar a remove_outliers_iqr con la columna "age" y factor=1.5
-        result = cleaner.remove_outliers_iqr(df, "age", factor=1.5)
+        # Llamar a remove_outliers_iqr con la columna "age" y factor=0.5
+        # Corregido segun aclaración del miercoles 26/11
+        result = cleaner.remove_outliers_iqr(df, "age", factor=0.5)
         print(result)
 
         # Verificar que el valor extremo (120) fue eliminado del resultado
-        # TODO: self.assertNotIn(120, result["age"].values)
+        self.assertNotIn(120, result["age"].values)
 
         # Verificar que al menos uno de los valores no extremos (25 o 35) permanece en el resultado
         self.assertIn(25, result["age"].values)
